@@ -1,5 +1,5 @@
 import './App.css'
-import { Navigate, Route, Routes } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import Login from './Components/Login'
 import Register from './Components/Register'
 import GamesContainer from './Components/GamesContainer'
