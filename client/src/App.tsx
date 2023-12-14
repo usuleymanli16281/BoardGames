@@ -4,6 +4,7 @@ import Login from './Components/Login'
 import Register from './Components/Register'
 import GamesContainer from './Components/GamesContainer'
 import { useState } from 'react'
+import ProtectedComponent from './Components/ProtectedComponent'
 
 const games = [
   {
@@ -51,10 +52,12 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path='' element={<Navigate to="/login" replace />} />
+        <Route path='/' element={<ProtectedComponent />}>
+          <Route index element={<GamesContainer games={games} token={token} />} />
+        </Route>
         <Route path='login' element={<Login />} />
         <Route path='register' element={<Register />} />
-        <Route path='games' element={<GamesContainer games={games} token={token}/>} />
+
       </Routes>
     </>
   )
