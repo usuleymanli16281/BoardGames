@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "kk7n94QwC0PjVOiW1J5cL2/+hqZY82hFIGeWyHFFnTUQHhtsz5PUssXEDCPPM0POB4kaJK+QeA4kn5pHsHrqig==",
+  "dgSpecHash": "TWMkgynP0ClLt/ufBflGJfLCjK0xba4SY44p+G+DTh7ZOl2msA2F/Hco95l9z4fhVa2AdZInyx4hpH8LYi+LVw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\lenovo\\OneDrive\\Desktop\\site\\BoardGames\\BoardGames\\BoardGames.csproj",
+  "projectFilePath": "C:\\Users\\lenovo\\OneDrive\\Desktop\\site\\BoardGames\\BoardGames\\BoardGames\\server\\BoardGames.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\lenovo\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\lenovo\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",

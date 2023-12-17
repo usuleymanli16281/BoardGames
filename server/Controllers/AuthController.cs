@@ -29,8 +29,7 @@ public class AuthController : ControllerBase
 
         var player = new Player()
         {
-            Name = model.Name,
-            Surname = model.Surname,
+          
             Nick = model.Nick,
             Email = model.Email,
             PasswordHash = BCrypt.Net.BCrypt.HashPassword(model.Password),

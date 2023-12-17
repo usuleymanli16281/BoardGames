@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\lenovo\\OneDrive\\Desktop\\site\\BoardGames\\BoardGames\\BoardGames.csproj": {}
+    "C:\\Users\\lenovo\\OneDrive\\Desktop\\site\\BoardGames\\BoardGames\\BoardGames\\server\\BoardGames.csproj": {}
   },
   "projects": {
-    "C:\\Users\\lenovo\\OneDrive\\Desktop\\site\\BoardGames\\BoardGames\\BoardGames.csproj": {
+    "C:\\Users\\lenovo\\OneDrive\\Desktop\\site\\BoardGames\\BoardGames\\BoardGames\\server\\BoardGames.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\lenovo\\OneDrive\\Desktop\\site\\BoardGames\\BoardGames\\BoardGames.csproj",
+        "projectUniqueName": "C:\\Users\\lenovo\\OneDrive\\Desktop\\site\\BoardGames\\BoardGames\\BoardGames\\server\\BoardGames.csproj",
         "projectName": "BoardGames",
-        "projectPath": "C:\\Users\\lenovo\\OneDrive\\Desktop\\site\\BoardGames\\BoardGames\\BoardGames.csproj",
+        "projectPath": "C:\\Users\\lenovo\\OneDrive\\Desktop\\site\\BoardGames\\BoardGames\\BoardGames\\server\\BoardGames.csproj",
         "packagesPath": "C:\\Users\\lenovo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\lenovo\\OneDrive\\Desktop\\site\\BoardGames\\BoardGames\\obj\\",
+        "outputPath": "C:\\Users\\lenovo\\OneDrive\\Desktop\\site\\BoardGames\\BoardGames\\BoardGames\\server\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
