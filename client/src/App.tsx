@@ -1,8 +1,9 @@
 import './App.css'
 import { Route, Routes } from 'react-router-dom'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { MainContext } from './context'
 import { GamesContainer, Layout, Login, ProtectedComponent, Register } from './Components';
+import { jwtDecode } from 'jwt-decode';
 const games = [
   {
     "id": 1,
@@ -41,10 +42,12 @@ const games = [
 function App() {
 
   const [token, setToken] = useState()
+  const [userInfo, setUserInfo] = useState()
+
 
   return (
     <>
-      <MainContext.Provider value={{ setToken }}>
+      <MainContext.Provider value={{ setToken, token, setUserInfo }}>
         <Routes>
           <Route path='/' element={<ProtectedComponent />}>
             <Route path="/" element={<Layout />}>

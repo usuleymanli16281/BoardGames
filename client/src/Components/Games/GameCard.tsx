@@ -20,7 +20,6 @@ const GameCard: React.FC<GameCardProps> = ({ game }) => {
         <p className="text-gray-700 dark:text-gray-400 text-base mb-4">
           {game.description}
         </p>
-        {/* Add more game details here */}
       </div>
     </div>
   );
