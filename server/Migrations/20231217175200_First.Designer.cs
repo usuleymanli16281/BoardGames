@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BoardGames.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231217145003_First")]
+    [Migration("20231217175200_First")]
     partial class First
     {
         /// <inheritdoc />
@@ -35,7 +35,7 @@ namespace BoardGames.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Nick")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

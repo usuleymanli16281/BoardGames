@@ -28,7 +28,7 @@ public class AuthController : ControllerBase
     {
         try
         {
-            var existingPlayer = await _context.Players.FirstOrDefaultAsync(p => p.Email == model.Email || p.Nick == model.Nick);
+            var existingPlayer = await _context.Players.FirstOrDefaultAsync(p => p.Email == model.Email || p.Name == model.Name);
 
             if (existingPlayer != null)
             {
@@ -39,7 +39,7 @@ public class AuthController : ControllerBase
 
             var newPlayer = new Player
             {
-                Nick = model.Nick,
+                Name = model.Name,
                 Email = model.Email,
                 PasswordHash = hashedPassword,
                 // Add other properties as needed
@@ -48,7 +48,7 @@ public class AuthController : ControllerBase
             _context.Players.Add(newPlayer);
             await _context.SaveChangesAsync();
 
-            var token = GenerateTokens(newPlayer.Email, newPlayer.PasswordHash, newPlayer.Nick);
+            var token = GenerateTokens(newPlayer.Email, newPlayer.PasswordHash, newPlayer.Name);
 
 
             await _context.SaveChangesAsync();
@@ -64,11 +64,11 @@ public class AuthController : ControllerBase
     [HttpPost("/login")]
     public async Task<IActionResult> Login([FromBody] LoginModel model)
     {
-        var player = await _context.Players.FirstOrDefaultAsync(u => u.Nick == model.Nick);
+        var player = await _context.Players.FirstOrDefaultAsync(u => u.Name ==  model.Name);
 
         if (player != null && BCrypt.Net.BCrypt.Verify(model.Password, player.PasswordHash))
         {
-            var token = GenerateTokens(player.Email, player.PasswordHash, player.Nick);
+            var token = GenerateTokens(player.Email, player.PasswordHash, player.Name);
 
 
             await _context.SaveChangesAsync();
@@ -80,14 +80,14 @@ public class AuthController : ControllerBase
     }
 
 
-    private string GenerateTokens(string email, string password, string nick)
+    private string GenerateTokens(string email, string password, string name)
     {
         var key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_configuration["Jwt:Secret"]));
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(new[]
             {
-                new Claim(ClaimTypes.NameIdentifier, nick),
+                new Claim(ClaimTypes.Name, name),
                 new Claim(ClaimTypes.Email, email),
                 new Claim(ClaimTypes.Hash, password)
             }),
