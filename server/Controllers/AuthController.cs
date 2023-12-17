@@ -50,7 +50,7 @@ public class AuthController : ControllerBase
 
             var token = GenerateTokens(newPlayer.Email, newPlayer.PasswordHash, newPlayer.Nick);
 
-            
+
             await _context.SaveChangesAsync();
 
             return Ok(new { Message = "Registration successful", Token = token });
@@ -70,10 +70,10 @@ public class AuthController : ControllerBase
         {
             var token = GenerateTokens(player.Email, player.PasswordHash, player.Nick);
 
-           
+
             await _context.SaveChangesAsync();
 
-            return Ok(new { Token=token});
+            return Ok(new { Token = token });
         }
 
         return Unauthorized(new { Message = "Invalid email or password" });
@@ -101,4 +101,5 @@ public class AuthController : ControllerBase
         return accessToken;
 
 
-    };
+    }
+}
