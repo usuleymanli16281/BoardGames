@@ -2,7 +2,7 @@ import './App.css'
 import { Route, Routes } from 'react-router-dom'
 import { useState } from 'react'
 import { MainContext } from './context'
-import { GamesContainer, Layout, Login, Register } from './Components';
+import { GamesContainer, Layout, Login, ProtectedComponent, Register } from './Components';
 const games = [
   {
     "id": 1,
@@ -46,10 +46,11 @@ function App() {
     <>
       <MainContext.Provider value={{ setToken }}>
         <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<GamesContainer games={games} />} />
+          <Route path='/' element={<ProtectedComponent />}>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<GamesContainer games={games} />} />
+            </Route>
           </Route>
-          {/* <Route path='/' element={<ProtectedComponent />}></Route> */}
           <Route path='login' element={<Login />} />
           <Route path='register' element={<Register />} />
         </Routes>
