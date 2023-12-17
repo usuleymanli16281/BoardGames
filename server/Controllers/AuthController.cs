@@ -23,7 +23,7 @@ public class AuthController : ControllerBase
         _configuration = configuration;
     }
 
-    [HttpPost("register")]
+    [HttpPost("/register")]
     public async Task<IActionResult> Register([FromBody] RegisterModel model)
     {
         try
@@ -48,12 +48,12 @@ public class AuthController : ControllerBase
             _context.Players.Add(newPlayer);
             await _context.SaveChangesAsync();
 
-            var (accessToken, refreshToken) = GenerateTokens(newPlayer.Email, newPlayer.PasswordHash, newPlayer.Nick);
+            var token = GenerateTokens(newPlayer.Email, newPlayer.PasswordHash, newPlayer.Nick);
 
-            newPlayer.RefreshToken = refreshToken; // Store the refresh token securely
+            
             await _context.SaveChangesAsync();
 
-            return Ok(new { Message = "Registration successful", AccessToken = accessToken, RefreshToken = refreshToken });
+            return Ok(new { Message = "Registration successful", Token = token });
         }
         catch (Exception ex)
         {
@@ -61,50 +61,33 @@ public class AuthController : ControllerBase
         }
     }
 
-    [HttpPost("login")]
+    [HttpPost("/login")]
     public async Task<IActionResult> Login([FromBody] LoginModel model)
     {
         var player = await _context.Players.FirstOrDefaultAsync(u => u.Nick == model.Nick);
 
         if (player != null && BCrypt.Net.BCrypt.Verify(model.Password, player.PasswordHash))
         {
-            var (accessToken, refreshToken) = GenerateTokens(player.Email, player.PasswordHash, player.Nick);
+            var token = GenerateTokens(player.Email, player.PasswordHash, player.Nick);
 
-            player.RefreshToken = refreshToken; // Update the refresh token
+           
             await _context.SaveChangesAsync();
 
-            return Ok(new { AccessToken = accessToken, RefreshToken = refreshToken });
+            return Ok(new { Token=token});
         }
 
         return Unauthorized(new { Message = "Invalid email or password" });
     }
 
-    [HttpPost("refresh-token")]
-    public IActionResult GenerateRefreshToken([FromBody] RefreshTokenModel model)
-    {
-        var player = _context.Players.FirstOrDefault(u => u.RefreshToken == model.RefreshToken);
 
-        if (player != null)
-        {
-            var (accessToken, refreshToken) = GenerateTokens(player.Email, player.PasswordHash,player.Nick);
-
-            player.RefreshToken = refreshToken; // Update the refresh token
-            _context.SaveChanges();
-
-            return Ok(new { AccessToken = accessToken, RefreshToken = refreshToken });
-        }
-
-        return Unauthorized(new { Message = "Invalid refresh token" });
-    }
-
-    private (string AccessToken, string RefreshToken) GenerateTokens(string email, string password,string nick)
+    private string GenerateTokens(string email, string password, string nick)
     {
         var key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_configuration["Jwt:Secret"]));
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(new[]
             {
-                new Claim(ClaimTypes.NameIdentifier,nick),
+                new Claim(ClaimTypes.NameIdentifier, nick),
                 new Claim(ClaimTypes.Email, email),
                 new Claim(ClaimTypes.Hash, password)
             }),
@@ -115,14 +98,7 @@ public class AuthController : ControllerBase
         var tokenHandler = new JwtSecurityTokenHandler();
         var accessToken = tokenHandler.WriteToken(tokenHandler.CreateToken(tokenDescriptor));
 
-        var refreshToken = GenerateRefreshToken();
+        return accessToken;
 
-        return (accessToken, refreshToken);
-    }
 
-    private string GenerateRefreshToken()
-    {
-        
-        return Guid.NewGuid().ToString();
-    }
-}
+    };
