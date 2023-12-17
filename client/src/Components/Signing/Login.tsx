@@ -1,7 +1,8 @@
-import { ChangeEvent, FormEvent,useState } from "react"
-import { showicon, unshowicon } from "../assets"
+import { ChangeEvent, FormEvent, useState } from "react"
+import { showicon, unshowicon } from "../../assets"
 import axios from "axios";
-import { MainContext, useContext } from "../context";
+import { MainContext, useContext } from "../../context";
+import { NavLink } from "react-router-dom";
 
 export default function Login() {
 
@@ -47,6 +48,7 @@ export default function Login() {
                 <button type="submit">Login</button>
                 {error && <div className="text-red-600 mt-1 p-1">{error}</div>}
             </form>
+            <div>Already have an account?<NavLink to="/register" className="text-green-400 ml-1 underline">Sign in</NavLink></div>
         </div>
 
     )

@@ -1,49 +1,42 @@
 import './App.css'
 import { Route, Routes } from 'react-router-dom'
-import Login from './Components/Login'
-import Register from './Components/Register'
-import GamesContainer from './Components/GamesContainer'
 import { useState } from 'react'
-import ProtectedComponent from './Components/ProtectedComponent'
-
+import { MainContext } from './context'
+import { GamesContainer, Layout, Login, Register } from './Components';
 const games = [
   {
-    id: 1,
-    title: "The Legend of Zelda: Breath of the Wild",
-    description: "An action-adventure game set in a vast open-world environment.",
-    imageUrl: "https://example.com/image/zelda.jpg"
+    "id": 1,
+    "title": "TicTacToe",
+    "description": "A fast-paced word game where players race against each other to build a word grid.",
+    "imageUrl": "https://img.freepik.com/premium-vector/vector-abstract-tictactoe_721813-301.jpg",
   },
   {
-    id: 2,
-    title: "Super Mario Odyssey",
-    description: "A platform adventure game featuring Mario in a massive sandbox-style world.",
-    imageUrl: "https://example.com/image/mario.jpg"
+    "id": 2,
+    "title": "Jenga",
+    "description": "A game of physical skill involving removing blocks from a tower and balancing them on top.",
+    "imageUrl": "https://pics.walgreens.com/prodimg/635315/450.jpg"
   },
   {
-    id: 3,
-    title: "Minecraft",
-    description: "A sandbox game where players can build, mine, battle, and explore in an infinite world.",
-    imageUrl: "https://example.com/image/minecraft.jpg"
+    "id": 3,
+    "title": "Telestrations",
+    "description": "A fun drawing and guessing game where players illustrate words and phrases.",
+    "imageUrl": "https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/81DomMVWl+L._AC_UF894,1000_QL80_.jpg"
   },
   {
-    id: 4,
-    title: "Fortnite",
-    description: "A battle royale game where players fight to be the last one standing.",
-    imageUrl: "https://example.com/image/fortnite.jpg"
+    "id": 4,
+    "title": "Othello",
+    "description": "A strategy board game played between two players, aiming to have the majority of disks on the board in their color.",
+    "imageUrl": "https://m.media-amazon.com/images/I/71YiFFzJvDL._AC_UF894,1000_QL80_.jpg"
   },
   {
-    id: 5,
-    title: "Animal Crossing: New Horizons",
-    description: "A social simulation game where players can create and manage their own island paradise.",
-    imageUrl: "https://example.com/image/animalcrossing.jpg"
+    "id": 5,
+    "title": "Charades",
+    "description": "A classic party game of acting out words or phrases for others to guess.",
+    "imageUrl": "https://i1.sndcdn.com/avatars-000057531948-l5j1se-t500x500.jpg"
   },
-  {
-    id: 6,
-    title: "Among Us",
-    description: "A multiplayer game where players work together on a spaceship but some are impostors bent on sabotage.",
-    imageUrl: "https://example.com/image/amongus.jpg"
-  }
-];
+  // Add more games as needed
+]
+
 
 function App() {
 
@@ -51,14 +44,16 @@ function App() {
 
   return (
     <>
-      <Routes>
-        <Route path='/' element={<ProtectedComponent />}>
-          <Route index element={<GamesContainer games={games} token={token} />} />
-        </Route>
-        <Route path='login' element={<Login />} />
-        <Route path='register' element={<Register />} />
-
-      </Routes>
+      <MainContext.Provider value={{ setToken }}>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<GamesContainer games={games} />} />
+          </Route>
+          {/* <Route path='/' element={<ProtectedComponent />}></Route> */}
+          <Route path='login' element={<Login />} />
+          <Route path='register' element={<Register />} />
+        </Routes>
+      </MainContext.Provider>
     </>
   )
 }

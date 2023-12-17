@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { isTokenValid } from "../verfiy";
+import { isTokenValid } from "../../verfiy";
 
 export default function ProtectedComponent() {
 
