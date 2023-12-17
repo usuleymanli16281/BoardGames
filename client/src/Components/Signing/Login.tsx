@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 
 export default function Login() {
 
-    const { setToken } = useContext(MainContext)
+    const { setToken, setUserInfo } = useContext(MainContext)
 
     const [logInfo, setLogInfo] = useState({ name: "", password: "" })
     const [passShow, setPassShow] = useState(false)
@@ -27,7 +27,7 @@ export default function Login() {
                 setError("")
                 localStorage.setItem("token", res.data.token)
                 setToken(res.data.token)
-                console.log(1)
+                setUserInfo(logInfo)
                 window.location.href = "."
             })
             .catch((err: { response: { data: { message: string } } }) => {
