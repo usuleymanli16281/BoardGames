@@ -20,7 +20,7 @@ public class AuthController : ControllerBase
         _configuration = configuration;
     }
 
-    [HttpPost("register")]
+    [HttpPost("/register")]
     
     public async Task<IActionResult> Register([FromBody] RegisterModel model)
     {
@@ -44,10 +44,10 @@ public class AuthController : ControllerBase
         return Ok(new { Message = "Registration successful" });
     }
 
-    [HttpPost("login")]
+    [HttpPost("/login")]
     public async Task<IActionResult> Login([FromBody] LoginModel model)
     {
-        var player = await _context.Players.FirstOrDefaultAsync(u => u.Email == model.Email);
+        var player = await _context.Players.FirstOrDefaultAsync(u => u.Nick == model.Nick);
 
         if (player != null && BCrypt.Net.BCrypt.Verify(model.Password, player.PasswordHash)) 
         {
