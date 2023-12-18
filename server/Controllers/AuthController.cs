@@ -48,7 +48,7 @@ public class AuthController : ControllerBase
             _context.Players.Add(newPlayer);
             await _context.SaveChangesAsync();
 
-            var token = GenerateTokens(newPlayer.Email, newPlayer.PasswordHash, newPlayer.Name);
+            var token = GenerateToken(newPlayer.Email, newPlayer.PasswordHash, newPlayer.Name);
 
 
             await _context.SaveChangesAsync();
@@ -68,7 +68,7 @@ public class AuthController : ControllerBase
 
         if (player != null && BCrypt.Net.BCrypt.Verify(model.Password, player.PasswordHash))
         {
-            var token = GenerateTokens(player.Email, player.PasswordHash, player.Name);
+            var token = GenerateToken(player.Email, player.PasswordHash, player.Name);
 
 
             await _context.SaveChangesAsync();
@@ -79,8 +79,7 @@ public class AuthController : ControllerBase
         return Unauthorized(new { Message = "Invalid email or password" });
     }
 
-
-    private string GenerateTokens(string email, string password, string name)
+    private string GenerateToken(string email, string password, string name)
     {
         var key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_configuration["Jwt:Secret"]));
         var tokenDescriptor = new SecurityTokenDescriptor

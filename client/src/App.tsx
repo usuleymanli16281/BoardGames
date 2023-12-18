@@ -40,11 +40,11 @@ const games = [
 
 
 function App() {
-
+  
   const [token, setToken] = useState()
   const [userInfo, setUserInfo] = useState()
 
-
+  
   return (
     <>
       <MainContext.Provider value={{ setToken, token, setUserInfo }}>
