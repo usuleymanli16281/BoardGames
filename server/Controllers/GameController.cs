@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BoardGames.Controllers
 {
@@ -16,13 +17,14 @@ namespace BoardGames.Controllers
             _configuration = configuration;
         }
         [HttpGet("/games/{name}")]
-        public async Task<IActionResult> GetName(string name)
+        public async Task<IActionResult> GetName([FromBody] string name)
         {
-            if(name != null)
+            
+            if (name != null)
             {
                 return Ok(name);
             }
-            return BadRequest();
+            return BadRequest("There is a problem in the name of game, please try again");
         }
     }
 }
