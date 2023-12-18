@@ -11,6 +11,7 @@ import {
 } from "./Components";
 import { jwtDecode } from "jwt-decode";
 import GameInterface from "./Components/Games/GameInterface";
+import TicTacToe from "./Components/Games/TicTacToe";
 const games = [
   {
     id: 1,
@@ -65,7 +66,6 @@ function App() {
       };
 
       setName(decodedToken.unique_name);
-      console.log(decodedToken);
     }
   }, [token]);
 
@@ -78,9 +78,11 @@ function App() {
       <MainContext.Provider value={{ setToken, token, setUserInfo, name }}>
         <Routes>
           <Route path="/" element={<ProtectedComponent />}>
-            <Route path="/" element={<Layout />}>
+            <Route path="" element={<Layout />}>
               <Route index element={<GamesContainer games={games} />} />
-            <Route path="/*" element={<GameInterface />} />
+              <Route path="games" element={<GameInterface/>}>
+                <Route path="tictactoe" element={<TicTacToe boardScale={2} />}/>
+              </Route>
             </Route>
           </Route>
           <Route path="login" element={<Login />} />

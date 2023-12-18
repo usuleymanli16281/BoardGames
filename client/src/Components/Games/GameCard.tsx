@@ -14,7 +14,7 @@ interface GameCardProps {
 
 const GameCard: React.FC<GameCardProps> = ({ game }) => {
   return (
-    <NavLink to={game.title.toLowerCase()}>
+    <NavLink to={"games/"+game.title.toLowerCase()}>
     <div className="bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
       <img className="rounded-t-lg" src={game.imageUrl} alt={game.title} />
       <div className="p-5">
