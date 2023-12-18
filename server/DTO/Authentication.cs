@@ -1,6 +1,6 @@
 ﻿namespace BoardGames.DTO
 {
-    public class RegisterModel
+    public class PlayerModel
     {
         public string Name { get; set; }
         public string Email { get; set; }

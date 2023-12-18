@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 export interface Game {
   id: number,
@@ -13,6 +14,7 @@ interface GameCardProps {
 
 const GameCard: React.FC<GameCardProps> = ({ game }) => {
   return (
+    <NavLink to={game.title.toLowerCase()}>
     <div className="bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
       <img className="rounded-t-lg" src={game.imageUrl} alt={game.title} />
       <div className="p-5">
@@ -22,6 +24,7 @@ const GameCard: React.FC<GameCardProps> = ({ game }) => {
         </p>
       </div>
     </div>
+    </NavLink>
   );
 };
 

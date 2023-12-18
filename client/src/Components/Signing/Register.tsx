@@ -49,6 +49,7 @@ export default function Register() {
       setUserInfo(regInfo)
       window.location.href = "."
     }).catch((err: AxiosError) => {
+      console.log(err)
       setError(err.message);
     }).finally(() => {
       setRegInfo({ name: "", email: "", password: "", confirmPassword: "" });
